@@ -76,9 +76,11 @@ export class DatabaseGroupsComponent implements OnInit, AfterViewInit {
     const dialog = this._dialog.open(GroupDialogComponent, {
       disableClose: true,
       data: {
+        showMultiselect: GlobalDialogCreator.showGroupDialogBoolen,
         type: FormType.ADD
       } as GroupDialogInject
     });
+    // dialog.afterClosed().subscribe(f);
     // dialog.disableClose().subscr
     dialog.afterClosed().subscribe((data?: GroupDialogData) => {
       if (data?.group) {
@@ -86,6 +88,7 @@ export class DatabaseGroupsComponent implements OnInit, AfterViewInit {
         this._updateGroupIdsInPersonDB(data.membersIds, groupId)
         this.groups = this._groupsService.getAll();
         this._snackBar.open("Group added!");
+        GlobalDialogCreator.notifyAll()
       }
     });
   }
@@ -109,6 +112,7 @@ export class DatabaseGroupsComponent implements OnInit, AfterViewInit {
         this._messagesService.add(message);
         this._snackBar.open("Message sent!");
       }
+        GlobalDialogCreator.notifyAll();
     });
   }
 
@@ -131,6 +135,7 @@ export class DatabaseGroupsComponent implements OnInit, AfterViewInit {
         this.groups = this._groupsService.getAll();
         this._snackBar.open("Group edited!");
       }
+      GlobalDialogCreator.notifyAll();
 
 
     });

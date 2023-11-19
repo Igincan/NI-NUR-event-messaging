@@ -5,6 +5,7 @@ import {map, startWith} from "rxjs/operators";
 import {AbstractDataService} from "../../services/abstract-data.service";
 import {DataElement} from "../../models/DataElement";
 import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
+import {GlobalDialogCreator} from "../../services/global.dialog.creator.service";
 
 @Component({
   selector: "app-multiselect",
@@ -114,12 +115,15 @@ export class MultiselectComponent<T extends DataElement> implements OnInit {
 
   callButtonFunction(): void {
     const allBeforeCall = this.allItems.slice();
+    GlobalDialogCreator.subscribe( () => {
+      console.log("button function called")
+      this.allItems = this.elementService.getAll();
+      const difference = this.allItems.filter(x => !allBeforeCall.includes(x));
+      this.allItems = this.allItems.filter(x => !this.selectedItems.includes(x));
+      console.log(difference[0]);
+      this.selectOption(difference[0])
+      // this.allItems = this.elementService.getAll().slice();
+    })
     this.buttonFunction();
-    console.log("button function called")
-    this.allItems = this.elementService.getAll();
-    const difference = this.allItems.filter(x => !allBeforeCall.includes(x));
-    this.allItems = this.allItems.filter(x => !this.selectedItems.includes(x));
-    console.log(difference[0]);
-    this.selectOption(difference[0])
   }
 }

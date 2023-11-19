@@ -17,6 +17,7 @@ import {GroupMessageDialogComponent} from "../../message-dialogs/group-message-d
 import {GroupMessageDialogInject} from "../../../models/dialog-injects/group-message-dialog-inject";
 import {MessageForm} from "../../../models/forms/message-form";
 import {MessagesService} from "../../../services/messages.service";
+import {GlobalDialogCreator} from "../../../services/global.dialog.creator.service";
 
 @Component({
   selector: "app-database-events",
@@ -78,6 +79,7 @@ export class DatabaseEventsComponent  implements OnInit, AfterViewInit {
         this.events = this._eventService.getAll();
         this._snackBar.open("Event added!");
       }
+      GlobalDialogCreator.notifyAll();
     });
   }
 
@@ -91,6 +93,7 @@ export class DatabaseEventsComponent  implements OnInit, AfterViewInit {
         this.events = this._eventService.getAll();
         this._snackBar.open("Event deleted!");
       }
+      GlobalDialogCreator.notifyAll();
     });
   }
 
@@ -108,6 +111,7 @@ export class DatabaseEventsComponent  implements OnInit, AfterViewInit {
         this.events = this._eventService.getAll();
         this._snackBar.open("Event edited!");
       }
+      GlobalDialogCreator.notifyAll();
     });
   }
 
@@ -127,6 +131,7 @@ export class DatabaseEventsComponent  implements OnInit, AfterViewInit {
         this._messagesService.add(message);
         this._snackBar.open("Message sent!");
       }
+      GlobalDialogCreator.notifyAll();
     });
   }
 }

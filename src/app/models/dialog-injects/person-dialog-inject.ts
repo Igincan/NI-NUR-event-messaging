@@ -5,6 +5,7 @@ import {Person} from "../person";
 
 export interface PersonDialogInject {
   person: Person;
+  showMultiselect: boolean;
   groups: Group[];
   type: FormType;
 }
