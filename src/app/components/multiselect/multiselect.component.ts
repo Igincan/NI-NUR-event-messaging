@@ -115,11 +115,16 @@ export class MultiselectComponent<T extends DataElement> implements OnInit {
 
   callButtonFunction(): void {
     const allBeforeCall = this.allItems.slice();
+    let called = false;
     GlobalDialogCreator.subscribe( () => {
+      if (called) {
+        return;
+      }
+      called = true;
       console.log("button function called")
       this.allItems = this.elementService.getAll();
-      const difference = this.allItems.filter(x => !allBeforeCall.includes(x));
       this.allItems = this.allItems.filter(x => !this.selectedItems.includes(x));
+      const difference = this.allItems.filter(x => !allBeforeCall.includes(x));
       console.log(difference[0]);
       this.selectOption(difference[0])
       // this.allItems = this.elementService.getAll().slice();

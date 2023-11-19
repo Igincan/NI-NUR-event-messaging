@@ -59,7 +59,7 @@ export class DatabasePeopleComponent implements OnInit, AfterViewInit {
     private _peopleService: PeopleService,
     private _groupsService: GroupsService
   ) {
-    GlobalDialogCreator.setShowPersonDialogCallback(() => this.showAddDialog(true))
+    GlobalDialogCreator.setShowPersonDialogCallback(() => this.showAddDialog(false))
   }
 
   ngOnInit(): void {
@@ -78,7 +78,7 @@ export class DatabasePeopleComponent implements OnInit, AfterViewInit {
     }
   }
 
-  showAddDialog(showMultiselect : boolean = false): void {
+  showAddDialog(showMultiselect : boolean = true): void {
     const dialog = this._dialog.open(PersonDialogComponent, {
       disableClose: true,
       data: {
@@ -117,6 +117,7 @@ export class DatabasePeopleComponent implements OnInit, AfterViewInit {
       data: {
         person: { ...person },
         groups: this.groups,
+        showMultiselect: true,
         type: FormType.EDIT
       } as PersonDialogInject
     });

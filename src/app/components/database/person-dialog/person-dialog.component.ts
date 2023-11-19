@@ -24,6 +24,7 @@ export class PersonDialogComponent {
     if (inject.person) {
       this.data = {
         person: inject.person,
+        showMultiselect: inject.showMultiselect,
         // groupIds: this.peopleService.getElem(inject.person.id)?.groupIds
         groupIds: inject.person.groupIds
       };
@@ -39,7 +40,8 @@ export class PersonDialogComponent {
                 email: ""
                 // groupNames: [],
             },
-            groupIds: []
+            groupIds: [],
+            showMultiselect: inject.showMultiselect
         };
     }
   }

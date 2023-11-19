@@ -31,6 +31,7 @@
       </mat-form-field>
     </div>
 
+    <div *ngIf="data.showMultiselect">
     <p>Add to groups</p>
     <app-multiselect [elementService]="groupsService"
                      [searchLabel]="'Search Groups'"
@@ -40,6 +41,7 @@
                      [isReadOnly]=false
                      (selectedIds)="saveMemberIds($event)">
     </app-multiselect>
+    </div>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-button (click)="validateAndClose()" cdkFocusInitial>Save</button>

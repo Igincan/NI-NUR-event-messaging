@@ -53,7 +53,7 @@ export class DatabaseGroupsComponent implements OnInit, AfterViewInit {
     private _peopleService: PeopleService
   ) {
     // Registering a callback for opening a dialog window
-    GlobalDialogCreator.setShowGroupDialogCallback(() => this.showAddDialog());
+    GlobalDialogCreator.setShowGroupDialogCallback(() => this.showAddDialog(false));
   }
 
   ngOnInit(): void {
@@ -72,11 +72,11 @@ export class DatabaseGroupsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public showAddDialog(): void {
+  public showAddDialog(showMultiselect: boolean = true): void {
     const dialog = this._dialog.open(GroupDialogComponent, {
       disableClose: true,
       data: {
-        showMultiselect: GlobalDialogCreator.showGroupDialogBoolen,
+        showMultiselect: showMultiselect,
         type: FormType.ADD
       } as GroupDialogInject
     });
@@ -121,7 +121,8 @@ export class DatabaseGroupsComponent implements OnInit, AfterViewInit {
       disableClose: true,
       data: {
         group: {...group},
-        type: FormType.EDIT
+        type: FormType.EDIT,
+        showMultiselect: true
       } as GroupDialogInject
     });
     dialog.afterClosed().subscribe((afterClose: GroupDialogData) => {

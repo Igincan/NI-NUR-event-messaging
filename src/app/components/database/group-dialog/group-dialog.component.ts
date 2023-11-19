@@ -25,12 +25,14 @@ export class GroupDialogComponent {
     if (inject.group) {
       this.data = {
         group: inject.group,
+        showMultiselect: inject.showMultiselect,
         membersIds: this.getPeopleInGroupIds(inject.group.id)
       };
     }
     else {
       this.data = {
         group: {id: 0, name: ""},
+        showMultiselect: inject.showMultiselect,
         membersIds: []
       };
     }
