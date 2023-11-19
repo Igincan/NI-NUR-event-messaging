@@ -30,10 +30,7 @@ export class MultiselectComponent<T extends DataElement> implements OnInit {
 
   ngOnInit(): void {
     this.convertElementToString = this.elementService.convertElementToString;
-    // easier here to use without slicing, so the newly added alem is visible straight afre adding
-    this.allItems = this.elementService.getAll();
-    // this.allItems = [];
-    // this.allItems = this.elementService.getAll().slice();
+    this.allItems = this.elementService.getAll().slice();
     this.filteredOptions = this.searchControl.valueChanges.pipe(
       startWith(""),
       map(value => {
@@ -70,6 +67,10 @@ export class MultiselectComponent<T extends DataElement> implements OnInit {
 
   onOptionSelected(event: MatAutocompleteSelectedEvent): void {
     const item = event.option.value as T;
+    this.selectOption(item);
+  }
+
+  selectOption(item: T): void {
     this.moveItemFromAllToSelected(item)
     this.displayedChips = this.selectedItems;
     this.chipsFilter = "";
@@ -112,7 +113,13 @@ export class MultiselectComponent<T extends DataElement> implements OnInit {
   }
 
   callButtonFunction(): void {
+    const allBeforeCall = this.allItems.slice();
     this.buttonFunction();
-    // TODO Renew data from service
+    console.log("button function called")
+    this.allItems = this.elementService.getAll();
+    const difference = this.allItems.filter(x => !allBeforeCall.includes(x));
+    this.allItems = this.allItems.filter(x => !this.selectedItems.includes(x));
+    console.log(difference[0]);
+    this.selectOption(difference[0])
   }
 }
