@@ -127,7 +127,6 @@ export class MultiselectComponent<T extends DataElement> implements OnInit {
       const difference = this.allItems.filter(x => !allBeforeCall.includes(x));
       console.log(difference[0]);
       this.selectOption(difference[0])
-      // this.allItems = this.elementService.getAll().slice();
     })
     this.buttonFunction();
   }

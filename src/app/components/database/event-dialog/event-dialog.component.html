@@ -1,38 +1,42 @@
 <!-- TODO - add to angular forms -->
 
-<div class="flex-row">
-  <h1 mat-dialog-title>{{inject.type}} Event</h1>
-  <button mat-button [mat-dialog-close]=null>
-    <mat-icon>close</mat-icon>
-  </button>
+<div class="form">
+    <div class="flex-row">
+      <h1 mat-dialog-title>{{inject.type}} Event</h1>
+      <button mat-button [mat-dialog-close]=null>
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <mat-dialog-content class="mat-typography">
+      <p>Enter event name:</p>
+      <mat-form-field appearance="fill" class="wide-field">
+        <mat-label>Name</mat-label>
+        <input cdkFocusInitial matInput [(ngModel)]="data.event.name" required>
+      </mat-form-field>
+      <div class="flex-row">
+          <mat-form-field appearance="fill" class="wide-field">
+            <mat-label>Date </mat-label>
+            <input matInput [(ngModel)]="data.event.dateTime">
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="wide-field">
+            <mat-label>Status</mat-label>
+            <input matInput [(ngModel)]="data.event.status">
+          </mat-form-field>
+      </div>
+      <mat-form-field appearance="fill" class="wide-field">
+        <mat-label>Description</mat-label>
+        <textarea [rows]=4 matInput [(ngModel)]="data.event.description"></textarea>
+      </mat-form-field>
+      <app-multiselect [elementService]="groupsService"
+                       [searchLabel]="'Search Groups'"
+                       [buttonLabel]="'Create New Group'"
+                       [buttonFunction]="addNewGroup"
+                       [preselectedIds]="data.membersIds"
+                       [isReadOnly]=false
+                       (selectedIds)="saveMemberIds($event)">
+      </app-multiselect>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button (click)="validateAndClose()" cdkFocusInitial>Save</button>
+    </mat-dialog-actions>
 </div>
-<mat-dialog-content class="mat-typography">
-  <p>Enter event name:</p>
-  <mat-form-field appearance="fill" class="wide-field">
-    <mat-label>Name</mat-label>
-    <input cdkFocusInitial matInput [(ngModel)]="data.event.name" required>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Date </mat-label>
-    <input matInput [(ngModel)]="data.event.dateTime">
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Description</mat-label>
-    <input matInput [(ngModel)]="data.event.description">
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Status</mat-label>
-    <input matInput [(ngModel)]="data.event.status">
-  </mat-form-field>
-  <app-multiselect [elementService]="groupsService"
-                   [searchLabel]="'Search Groups'"
-                   [buttonLabel]="'Add Group'"
-                   [buttonFunction]="addNewGroup"
-                   [preselectedIds]="data.membersIds"
-                   [isReadOnly]=false
-                   (selectedIds)="saveMemberIds($event)">
-  </app-multiselect>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button (click)="validateAndClose()" cdkFocusInitial>Save</button>
-</mat-dialog-actions>
