@@ -43,7 +43,6 @@ export class DatabasePeopleComponent implements OnInit, AfterViewInit {
     "firstName",
     "lastName",
     "phoneNumber",
-    "group",
     "editButton",
     "deleteButton"
   ];
@@ -120,7 +119,7 @@ export class DatabasePeopleComponent implements OnInit, AfterViewInit {
     });
     dialog.afterClosed().subscribe(( data?: PersonDialogData) => {
       if (data?.person) {
-        this._snackBar.open("Person dited!: " + data.person.id +" " + data.person.groupIds)
+        this._snackBar.open("Person edited")
         this._peopleService.editElem(data.person);
         this.people = this._peopleService.getAll();
         // this._snackBar.open("Person edited!");
