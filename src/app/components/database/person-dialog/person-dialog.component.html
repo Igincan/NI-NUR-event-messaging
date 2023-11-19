@@ -1,40 +1,47 @@
 <!-- TODO - add to angular forms -->
 
-<div class="flex-row">
-  <h1 mat-dialog-title>{{inject.type}} Person</h1>
-  <button mat-button [mat-dialog-close]=null>
-    <mat-icon>close</mat-icon>
-  </button>
+<div class="form">
+  <div class="flex-row">
+    <h1 mat-dialog-title>{{inject.type}} Person</h1>
+    <button mat-button [mat-dialog-close]=null>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content class="mat-typography">
+    <p>Enter full name</p>
+    <div class="flex-row">
+      <mat-form-field appearance="fill" class="wide-field">
+        <mat-label>First Name</mat-label>
+        <input cdkFocusInitial matInput [(ngModel)]="data.person.firstName" required>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="wide-field">
+        <mat-label>Last Name</mat-label>
+        <input matInput [(ngModel)]="data.person.lastName" required>
+      </mat-form-field>
+    </div>
+
+    <div class="flex-col">
+      <mat-form-field appearance="fill" class="wide-field no-margin">
+        <mat-label>Phone Number</mat-label>
+        <input matInput [(ngModel)]="data.person.phoneNumber">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="wide-field no-margin">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="data.person.email">
+      </mat-form-field>
+    </div>
+
+    <p>Add to groups</p>
+    <app-multiselect [elementService]="groupsService"
+                     [searchLabel]="'Search Groups'"
+                     [buttonLabel]="'Create New Group'"
+                     [buttonFunction]="addNewGroup"
+                     [preselectedIds]="data.groupIds"
+                     [isReadOnly]=false
+                     (selectedIds)="saveMemberIds($event)">
+    </app-multiselect>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="validateAndClose()" cdkFocusInitial>Save</button>
+  </mat-dialog-actions>
 </div>
-<mat-dialog-content class="mat-typography">
-  <p>Enter full name:</p>
-  <mat-form-field appearance="fill">
-    <mat-label>First Name</mat-label>
-    <input cdkFocusInitial matInput [(ngModel)]="data.person.firstName" required>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Last Name</mat-label>
-    <input matInput [(ngModel)]="data.person.lastName" required>
-  </mat-form-field>
-  <p>Select group:</p>
-  <app-multiselect [elementService]="groupsService"
-                   [searchLabel]="'Search Groups'"
-                   [buttonLabel]="'Add Group'"
-                   [buttonFunction]="addNewGroup"
-                   [preselectedIds]="data.groupIds"
-                   [isReadOnly]=false
-                   (selectedIds)="saveMemberIds($event)">
-  </app-multiselect>
-  <p>Enter phone number:</p>
-  <mat-form-field appearance="fill" class="wide-field">
-    <mat-label>Phone Number</mat-label>
-    <input matInput [(ngModel)]="data.person.phoneNumber">
-  </mat-form-field>
-  <mat-form-field appearance="fill" class="wide-field">
-    <mat-label>Email</mat-label>
-    <input matInput [(ngModel)]="data.person.email">
-  </mat-form-field>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button (click)="validateAndClose()"  cdkFocusInitial>Save</button>
-</mat-dialog-actions>
