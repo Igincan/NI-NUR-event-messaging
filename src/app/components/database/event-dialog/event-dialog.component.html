@@ -20,7 +20,10 @@
           </mat-form-field>
           <mat-form-field appearance="fill" class="wide-field">
             <mat-label>Status</mat-label>
-            <input matInput [(ngModel)]="data.event.status">
+            <mat-select matNativeControl [(ngModel)]="data.event.status">
+              <mat-option value="Scheduled">Scheduled</mat-option>
+              <mat-option value="Canceled">Canceled</mat-option>
+            </mat-select>
           </mat-form-field>
       </div>
       <mat-form-field appearance="fill" class="wide-field">
