@@ -43,6 +43,7 @@ export class DatabasePeopleComponent implements OnInit, AfterViewInit {
     "firstName",
     "lastName",
     "phoneNumber",
+    "email",
     "editButton",
     "deleteButton"
   ];
