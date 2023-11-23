@@ -14,10 +14,10 @@ export class MessagesService extends AbstractDataService<Message>{
 
   override add(message: Message | MessageForm): number {
     if (message.id) {
-      this._elems.push(message as Message);
+      this._elems.unshift(message as Message);
     }
     else {
-      this._elems.push({
+      this._elems.unshift({
         ...message as MessageForm,
         id: ++this._maxId
       } as Message);

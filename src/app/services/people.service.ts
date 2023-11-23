@@ -17,7 +17,7 @@ export class PeopleService extends AbstractDataService<Person>{
 
 
   override add(person: Person): number {
-    this._elems.push({
+    this._elems.unshift({
       id: ++this._maxId,
       groupIds: person.groupIds,
       firstName: person.firstName,

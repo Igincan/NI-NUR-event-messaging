@@ -16,8 +16,8 @@
     <mat-divider></mat-divider>
     <p style="margin-top: 1rem">Add people to group</p>
     <app-multiselect [elementService]="peopleService"
-                     [searchLabel]="'Search people'"
-                     [buttonLabel]="'Add Person'"
+                     [searchLabel]="'Search people to add'"
+                     [buttonLabel]="'Create New Person'"
                      [buttonFunction]="addNewPerson"
                      [preselectedIds]="data.membersIds"
                      [isReadOnly]=false

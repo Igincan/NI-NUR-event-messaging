@@ -110,6 +110,7 @@ export class MultiselectComponent<T extends DataElement> implements OnInit {
       const removed = this.selectedItems.splice(index, 1);
       removed.forEach(el => this.allItems.push(el));
       this.emitSelectedIds();
+      this.filterChips()
     }
   }
 
