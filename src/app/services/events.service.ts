@@ -13,7 +13,7 @@ export class EventsService extends AbstractDataService<WorkEvent>{
   }
   override add(event: WorkEvent): number {
     // event.id = ++super._maxId;
-    this._elems.push(
+    this._elems.unshift(
       {id: ++this._maxId, dateTime: event.dateTime, description: event.description, name: event.name, participantGroupIds: event.participantGroupIds, status: event.status}
     );
     return this._maxId;

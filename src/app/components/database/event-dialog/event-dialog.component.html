@@ -31,7 +31,7 @@
         <textarea [rows]=4 matInput [(ngModel)]="data.event.description"></textarea>
       </mat-form-field>
       <app-multiselect [elementService]="groupsService"
-                       [searchLabel]="'Search Groups'"
+                       [searchLabel]="'Search groups to Add'"
                        [buttonLabel]="'Create New Group'"
                        [buttonFunction]="addNewGroup"
                        [preselectedIds]="data.membersIds"

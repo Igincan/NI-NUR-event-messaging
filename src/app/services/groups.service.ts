@@ -17,7 +17,7 @@ export class GroupsService extends AbstractDataService<Group>{
     //   throw new Error("Missing name in group");
     // }
 
-    this._elems.push({ id: ++this._maxId, name: group.name });
+    this._elems.unshift({ id: ++this._maxId, name: group.name });
     return this._maxId;
   }
 
