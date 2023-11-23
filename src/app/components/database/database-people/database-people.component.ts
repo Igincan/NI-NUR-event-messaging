@@ -60,6 +60,12 @@ export class DatabasePeopleComponent implements OnInit, AfterViewInit {
     private _peopleService: PeopleService,
     private _groupsService: GroupsService
   ) {
+    let oldFilterPredicate = this.dataSource.filterPredicate;
+    this.dataSource.filterPredicate = (data: Person, filter: string) => {
+      return oldFilterPredicate(data, filter) || (data.firstName + data.lastName).toLowerCase().startsWith(filter.toLowerCase().replace(/\s/g, ""))
+          || (data.lastName + data.firstName).toLowerCase().startsWith(filter.toLowerCase().replace(/\s/g, ""))
+    };
+
     GlobalDialogCreator.setShowPersonDialogCallback(() => this.showAddDialog(false))
   }
 
